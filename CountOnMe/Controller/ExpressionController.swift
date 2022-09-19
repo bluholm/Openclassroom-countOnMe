@@ -32,4 +32,8 @@ var expressionHaveResult: Bool {
     return textView.text.firstIndex(of: "=") != nil
 }
 
+var divisionByzero: Bool {
+    return elements.last != "/"
+    }
+    
 }

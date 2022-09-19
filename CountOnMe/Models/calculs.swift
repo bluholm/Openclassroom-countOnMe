@@ -13,15 +13,9 @@ import UIKit
 func calculate(elements: [String]) -> [String] {
     
     var copyOfElements = elements
-    
-    
-        copyOfElements = reduceMultiplierDiviser(elements, "*")
-        copyOfElements = reduceMultiplierDiviser(copyOfElements, "/")
-
-    //if copyOfElements.contains("+") || copyOfElements.contains("-"){
-        copyOfElements = reduceplusMinus(operations: copyOfElements)
-    //}
-    
+    copyOfElements = reduceMultiplierDiviser(elements, "*")
+    copyOfElements = reduceMultiplierDiviser(copyOfElements, "/")
+    copyOfElements = reduceplusMinus(operations: copyOfElements)
     return copyOfElements
     
 }
