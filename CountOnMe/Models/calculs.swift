@@ -9,7 +9,7 @@
 import UIKit
 
 
-
+//function major to calculate
 func calculate(elements: [String]) -> [String] {
     
     var copyOfElements = elements
@@ -20,10 +20,8 @@ func calculate(elements: [String]) -> [String] {
     
 }
 
-
-//execution of division & multiplier first ! (math :)
+//execution of division & multiplier first
 func reduceMultiplierDiviser(_ operations: [String],_ operatorSign: String) -> [String]{
-    
     var operationsTemp = operations
     while operationsTemp.contains(operatorSign){
         var  temporaryResult: Double
@@ -37,18 +35,13 @@ func reduceMultiplierDiviser(_ operations: [String],_ operatorSign: String) -> [
             temporaryResult = left / right
             temporaryResult = round(temporaryResult * 100) / 100
         }
-        
-        // ⚠️ delete le avant et après
-        operationsTemp.remove(at: indexOfMultiplier)
-        operationsTemp.insert("\(temporaryResult)", at: indexOfMultiplier)
-        operationsTemp.remove(at: indexOfMultiplier+1)
-        operationsTemp.remove(at: indexOfMultiplier-1)
+        operationsTemp = replaceByResult(operations: operationsTemp,result: temporaryResult,index: indexOfMultiplier)
     }
     return operationsTemp
     }
 
+//reduce minus to let elements with only the good information ( plus and minus )
 func reduceplusMinus(operations: [String]) -> [String]{
-    
     var operationsTemp = operations
     // Iterate over operations while an operand still here
     while operationsTemp.count > 1 {
@@ -65,7 +58,16 @@ func reduceplusMinus(operations: [String]) -> [String]{
         
         operationsTemp = Array(operationsTemp.dropFirst(3))
         operationsTemp.insert("\(result)", at: 0)
-        
     }
     return operationsTemp
+}
+
+// replace at index the result and delete index left and right
+func replaceByResult(operations: [String],result: Double,index: Int)->[String]{
+    var operationsResult = operations
+    operationsResult.remove(at: index)
+    operationsResult.insert("\(result)", at: index)
+    operationsResult.remove(at: index+1)
+    operationsResult.remove(at: index-1)
+    return operationsResult
 }

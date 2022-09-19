@@ -5,14 +5,7 @@
 //  Created by Vincent Saluzzo on 29/03/2019.
 //  Copyright © 2019 Vincent Saluzzo. All rights reserved.
 //
-// ✅ Le design n’a pas été finalisé dans le projet Xcode : rien n’est responsive !
-// ✅ L’architecture du projet ne respecte pas encore les bonnes pratiques de développement (pas de MVC)
-// 𐄂 L’ensemble de l’application n’est pas testé
-// ✅ Seul la soustraction et l’addition ont été faits, il manque la division et la multiplication.
-// ✅ Permettre l’affichage de l’application dans toute les tailles d’iPhone en mode portrait.
-// ✅ Être exempt de tout erreur ou warning.
-// ✅ Être fonctionnelle sur iOS 11 et supérieur et écrit en Swift 4 minimum.
-// ✅ Test si zero lorsque l'on divise  a faire :)
+
 
  
 
@@ -49,6 +42,7 @@ class ViewController: UIViewController {
         
     }
     
+    // MARK: - action operators
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
         if canAddOperator && isFirstoperator {
             textView.text.append(" + ")
@@ -86,7 +80,7 @@ class ViewController: UIViewController {
     }
     
     
-
+    // MARK: - action Equals
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         guard expressionIsCorrect else {
             let alertVC = UIAlertController(title: "Error!", message: "please write a good operation", preferredStyle: .alert)
