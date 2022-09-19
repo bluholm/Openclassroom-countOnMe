@@ -17,7 +17,7 @@ var elements: [String] {
 
 // Error check computed variables
 var expressionIsCorrect: Bool {
-    return elements.last != "+" && elements.last != "-"
+    return elements.last != "+" && elements.last != "-" && elements.last != "*" && elements.last != "/"
 }
 
 var expressionHaveEnoughElement: Bool {
@@ -25,7 +25,7 @@ var expressionHaveEnoughElement: Bool {
 }
 
 var canAddOperator: Bool {
-    return elements.last != "+" && elements.last != "-"
+    return elements.last != "+" && elements.last != "-" && elements.last != "*" && elements.last != "/"
 }
 
 var expressionHaveResult: Bool {
