@@ -13,7 +13,7 @@
 // ✅ Être exempt de tout erreur ou warning.
 // ✅ Être fonctionnelle sur iOS 11 et supérieur et écrit en Swift 4 minimum.
 // ✅ Test si zero lorsque l'on divise  a faire :)
-// 𐄂 Check les signes negatifs et affiche les chiffres negatifs
+
  
 
 import UIKit
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         }
         
         if numberText == "0" && !divisionByzero{
-            let alertVC = UIAlertController(title: "Zéro!", message: "division par zero!", preferredStyle: .alert)
+            let alertVC = UIAlertController(title: "Error!", message: "Division  by 0 impossible", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alertVC, animated: true, completion: nil)
         } else {
@@ -50,45 +50,38 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
-        if canAddOperator {
+        if canAddOperator && isFirstoperator {
             textView.text.append(" + ")
         } else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alertVC, animated: true, completion: nil)
+            alertOperatorAlreadyExist()
         }
         
     }
     
     @IBAction func tappedSubstractionButton(_ sender: UIButton) {
-        if canAddOperator {
+        print("\(elements.count)")
+        if canAddOperator && isFirstoperator {
             textView.text.append(" - ")
         } else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alertVC, animated: true, completion: nil)
+            alertOperatorAlreadyExist()
         }
        
     }
     
     
     @IBAction func tappedMultiplyButton(_ sender: UIButton) {
-        if canAddOperator {
+        if canAddOperator && isFirstoperator {
             textView.text.append(" * ")
         } else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alertVC, animated: true, completion: nil)
+            alertOperatorAlreadyExist()
         }
     }
     
     @IBAction func tappedDivideButton(_ sender: UIButton) {
-        if canAddOperator {
+        if canAddOperator && isFirstoperator {
             textView.text.append(" / ")
         } else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alertVC, animated: true, completion: nil)
+            alertOperatorAlreadyExist()
         }
     }
     
@@ -96,13 +89,13 @@ class ViewController: UIViewController {
 
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         guard expressionIsCorrect else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)
+            let alertVC = UIAlertController(title: "Error!", message: "please write a good operation", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             return self.present(alertVC, animated: true, completion: nil)
         }
         
         guard expressionHaveEnoughElement else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Démarrez un nouveau calcul !", preferredStyle: .alert)
+            let alertVC = UIAlertController(title: "Error !", message: "not enough elements", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             return self.present(alertVC, animated: true, completion: nil)
         }
@@ -112,6 +105,12 @@ class ViewController: UIViewController {
     
     @IBAction func tappedResetButton(_ sender: UIButton) {
         textView.text = ""
+    }
+    
+    func alertOperatorAlreadyExist() {
+        let alertVC = UIAlertController(title: "Error!", message: "operator error", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alertVC, animated: true, completion: nil)
     }
     
 }

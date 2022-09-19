@@ -17,15 +17,28 @@ var elements: [String] {
 
 // Error check computed variables
 var expressionIsCorrect: Bool {
-    return elements.last != "+" && elements.last != "-" && elements.last != "*" && elements.last != "/"
+    return elements.last != "+" && elements.last != "-"
+    && elements.last != "*" && elements.last != "/"
+    && !expressionContainEqual
 }
+
+    
+var isFirstoperator: Bool {
+        return elements.count>=1
+}
+    
+
+var expressionContainEqual: Bool {
+    return elements.contains("=")
+}
+    
 
 var expressionHaveEnoughElement: Bool {
     return elements.count >= 3
 }
 
 var canAddOperator: Bool {
-    return elements.last != "+" && elements.last != "-" && elements.last != "*" && elements.last != "/"
+    return elements.last != "+" && elements.last != "-" && elements.last != "*" && elements.last != "/" && !expressionContainEqual
 }
 
 var expressionHaveResult: Bool {
