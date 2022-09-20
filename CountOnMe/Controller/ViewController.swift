@@ -13,15 +13,20 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    private var calculate = Calcul()
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     
+    // MARK: - Life cycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         textView.text = ""
     }
     
-    // MARK: - action tapped
+    // MARK: - Users action
+    
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         
         guard let numberText = sender.title(for: .normal) else {
@@ -42,7 +47,6 @@ class ViewController: UIViewController {
         
     }
     
-    // MARK: - action operators
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
         if canAddOperator && isFirstoperator {
             textView.text.append(" + ")
@@ -79,8 +83,6 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    // MARK: - action Equals
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         guard expressionIsCorrect else {
             let alertVC = UIAlertController(title: "Error!", message: "please write a good operation", preferredStyle: .alert)
@@ -94,14 +96,17 @@ class ViewController: UIViewController {
             return self.present(alertVC, animated: true, completion: nil)
         }
         
-        textView.text.append(" = \(calculate(elements: elements).first!)")
+        guard let result = calculate.getResultTotalOperation(elements).first else { return }
+        textView.text.append(" = \(result)")
     }
     
     @IBAction func tappedResetButton(_ sender: UIButton) {
         textView.text = ""
     }
     
-    func alertOperatorAlreadyExist() {
+    // MARK: - Custom Methods
+    
+    private func alertOperatorAlreadyExist() {
         let alertVC = UIAlertController(title: "Error!", message: "operator error", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alertVC, animated: true, completion: nil)
