@@ -11,32 +11,11 @@ import Foundation
 
 class CalculatorTdd {
   
-    func substract(_ firstNumber: Double,_ secondNumber: Double) -> Double{
-        let result = firstNumber - secondNumber
-        return result
-    }
-
-    func add(_ firstNumber: Double,_ secondNumber: Double) -> Double{
-        let result = firstNumber + secondNumber
-        return result
-    }
-    
-    func multiply(_ firstNumber: Double,_ secondNumber: Double) -> Double{
-        let result = firstNumber * secondNumber
-        return result
-    }
-    
-    func divide(_ firstNumber: Double,_ secondNumber: Double) -> Double{
-        let result = firstNumber / secondNumber
-        return result
-    }
-    
-
     func additionByArray(_ toBeAdded: [String]) -> [String] {
         let result: [String]
         let firstNumber = Double(toBeAdded[0])!
         let secondNumber = Double(toBeAdded[2])!
-        let calcul = add(firstNumber, secondNumber)
+        let calcul = firstNumber+secondNumber
         result = ["\(calcul)"]
         return result
     }
@@ -45,7 +24,7 @@ class CalculatorTdd {
         let result: [String]
         let firstNumber = Double(toBeAdded[0])!
         let secondNumber = Double(toBeAdded[2])!
-        let calcul = substract(firstNumber, secondNumber)
+        let calcul = firstNumber-secondNumber
         result = ["\(calcul)"]
         return result
     }
@@ -54,7 +33,7 @@ class CalculatorTdd {
         let result: [String]
         let firstNumber = Double(toBeAdded[0])!
         let secondNumber = Double(toBeAdded[2])!
-        let calcul = multiply(firstNumber, secondNumber)
+        let calcul = firstNumber*secondNumber
         result = ["\(calcul)"]
         return result
     }
@@ -63,7 +42,7 @@ class CalculatorTdd {
         let result: [String]
         let firstNumber = Double(toBeAdded[0])!
         let secondNumber = Double(toBeAdded[2])!
-        let calcul = divide(firstNumber, secondNumber)
+        let calcul = firstNumber/secondNumber
         result = ["\(calcul)"]
         return result
     }
@@ -72,13 +51,32 @@ class CalculatorTdd {
         return inputs.firstIndex(of: inputOperator)
     }
     
-    func ExtractByArray (_ inputs:[String], _ index: Int) -> [String] {
+    func extractByArray (_ inputs:[String], _ index: Int) -> [String] {
         var result:[String] = []
         result.append(inputs[index-1])
         result.append(inputs[index])
         result.append(inputs[index+1])
         
         return result
+    }
+    
+    func reduce(_ inputs:[String]) -> [String] {
+        var result:[String] = []
+        
+        switch inputs[1] {
+        case "+":
+            result = additionByArray(inputs)
+        case "-":
+            result = substractByArray(inputs)
+        case "*":
+            result = multiplyByArray(inputs)
+        case "/":
+            result = divideByArray(inputs)
+        default:
+            break
+        }
+        return result
+        
     }
 
 }

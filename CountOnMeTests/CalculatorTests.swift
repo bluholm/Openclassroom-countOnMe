@@ -40,45 +40,6 @@ final class CountOnMeTests: XCTestCase {
         XCTAssertNotNil(calculator)
     }
     
-    func testGiven2And2WhenAddTheResultIs4() {
-        
-        let numberOne = 2.0
-        let numberTwo = 2.0
-        
-        let result = calculator.add(numberOne, numberTwo)
-        
-        XCTAssertEqual(numberOne+numberTwo, result)
-    }
-    
-    func testGiven2And2WhenSubstractTheResultIs0() {
-        
-        let numberOne = 2.0
-        let numberTwo = 2.0
-        
-        let result = calculator.substract(numberOne, numberTwo)
-        
-        XCTAssertEqual(numberOne-numberTwo, result)
-    }
-    
-    func testGiven2And3WhenMultiplyTheResultIs6() {
-        
-        let numberOne = 2.0
-        let numberTwo = 3.0
-        
-        let result = calculator.multiply(numberOne, numberTwo)
-        
-        XCTAssertEqual(numberOne*numberTwo, result)
-    }
-    
-    func testGiven8And2WhenDivideTheResultIs4() {
-        
-        let numberOne = 8.0
-        let numberTwo = 2.0
-        
-        let result = calculator.divide(numberOne, numberTwo)
-        
-        XCTAssertEqual(numberOne/numberTwo, result)
-    }
     
     func testGivenArray2Plus2WhenAdditionResultIsArray4() {
         let toBeAdded = ["2.0","+","2.0"]
@@ -114,7 +75,7 @@ final class CountOnMeTests: XCTestCase {
     
     // TestCase 07: trouver 1 operateur
     func testGivenArrayOfStringWhenGetIndexFirstOperatorThenINdexis5 () {
-        let given = ["1","+","1","*","2" ]
+        let given = ["1.0","+","1.0","*","2.0" ]
         let inputOperator = "*"
         let then = calculator.findOperatorToExecute(given,inputOperator)
         XCTAssertEqual(then, 3)
@@ -122,15 +83,24 @@ final class CountOnMeTests: XCTestCase {
     
     //extract calcul size 3 and result should equal
     func testGivenArrayOfStringWhenexctractWithIndexThenArraySize3 () {
-        let given = ["1","+","1","*","2","+","6","/","1"]
+        let given = ["1.0","+","1.0","*","2.0","+","6.0","/","1.0"]
         let index = 3
         
-        let result = calculator.ExtractByArray(given,index)
+        let result = calculator.extractByArray(given,index)
         
-        XCTAssertEqual(result, ["1","*","2"])
+        XCTAssertEqual(result, ["1.0","*","2.0"])
         XCTAssertTrue(result.count == 3)
     }
     
+    //reduce calcul size 3 to 1 and do the calcul
+    func testGivenArrayOfcalculWhenReduceThenResultIs3 () {
+        let given = ["3.0","*","2.0"]
+        
+        let result = calculator.reduce(given)
+        
+        XCTAssertEqual(result, ["6.0"])
+        XCTAssertTrue(result.count == 1)
+    }
     
     
 }
