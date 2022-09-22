@@ -7,19 +7,6 @@
 //
 
 //Liste de mes comportement (test cases) pour réaliser le modèle en TDD :
-// TestCase 01: ✅ Class de calcul
-// TestCase 02: ✅ faire une addition
-// TestCase 03: ✅ remplace 3 par 1 pour addition
-// TestCase 04: ✅ faire une soustraction
-// TestCase 05: ✅ faire une division
-// TestCase 06: ✅ faire une multiplication
-// TestCase 07: ✅ trouve un operateurs prioritaires
-// TestCase 08: operateurs prioritaire existe
-// TestCase 09: clique sur = : renvoi un resultat
-// TestCase 10: arrondir une valeur
-// TestCase 11: division par zero
-// TestCase 12: change a string into Int
-// TestCase 13: change a Int into string
 
 
 @testable import CountOnMe
@@ -74,7 +61,7 @@ final class CountOnMeTests: XCTestCase {
     }
     
     // TestCase 07: trouver 1 operateur
-    func testGivenArrayOfStringWhenGetIndexFirstOperatorThenINdexis5 () {
+    func testGivenArrayOfStringWhenGetIndexFirstOperatorThenINdexis5() {
         let given = ["1.0","+","1.0","*","2.0" ]
         let inputOperator = "*"
         let then = calculator.findOperatorToExecute(given,inputOperator)
@@ -82,18 +69,18 @@ final class CountOnMeTests: XCTestCase {
     }
     
     //extract calcul size 3 and result should equal
-    func testGivenArrayOfStringWhenexctractWithIndexThenArraySize3 () {
+    func testGivenArrayOfStringWhenexctractWithIndexThenArraySize3() {
         let given = ["1.0","+","1.0","*","2.0","+","6.0","/","1.0"]
         let index = 3
         
-        let result = calculator.extractByArray(given,index)
+        let result = calculator.extractByArray(given,at: index)
         
         XCTAssertEqual(result, ["1.0","*","2.0"])
         XCTAssertTrue(result.count == 3)
     }
     
     //reduce calcul size 3 to 1 and do the calcul
-    func testGivenArrayOfcalculWhenReduceThenResultIs3 () {
+    func testGivenArrayOfcalculWhenReduceMultiplierThenResultIs3() {
         let given = ["3.0","*","2.0"]
         
         let result = calculator.reduce(given)
@@ -101,6 +88,78 @@ final class CountOnMeTests: XCTestCase {
         XCTAssertEqual(result, ["6.0"])
         XCTAssertTrue(result.count == 1)
     }
+    
+    func testGivenArrayOfcalculWhenReduceSommeThenResultIs5() {
+        let given = ["3.0","+","2.0"]
+        
+        let result = calculator.reduce(given)
+        
+        XCTAssertEqual(result, ["5.0"])
+        XCTAssertTrue(result.count == 1)
+    }
+    
+    func testGivenArrayOfcalculWhenReduceDiviserThenResultIs2() {
+        let given = ["4.0","/","2.0"]
+        
+        let result = calculator.reduce(given)
+        
+        XCTAssertEqual(result, ["2.0"])
+        XCTAssertTrue(result.count == 1)
+    }
+    
+    func testGivenArrayOfcalculWhenReduceSubstractThenResultIs1() {
+        let given = ["3.0","-","2.0"]
+        
+        let result = calculator.reduce(given)
+        
+        XCTAssertEqual(result, ["1.0"])
+        XCTAssertTrue(result.count == 1)
+    }
+    
+    func testGivenArrayOFStringWhenInsertBackThenResultIsArrayOfString() {
+        let given = ["1.0","+","1.0","*","2.0","+","6.0","/","1.0"]
+        let index = 3
+        
+        let result = calculator.calculateOneOperation(given,at: index)
+        
+        XCTAssertEqual(result, ["1.0","+","2.0","+","6.0","/","1.0"])
+    }
+    
+    func testGivenArrayOfStringWhenRemoveThenArrayOfStringIsShorter() {
+        let given = ["1.0","+","1.0","*","2.0","+","6.0","/","1.0"]
+        let index = 3
+        
+        let result = calculator.remove(given,at: index)
+        
+        XCTAssertEqual(result, ["1.0","+","+","6.0","/","1.0"])
+    }
+
+    func testGivenOperatorWwhenCalculateOneOperatorThenArrayOfstringReducedWithoutOperator(){
+        let given = ["1.0","+","1.0","*","2.0","+","6.0","/","1.0","1.0","+","1.0","*","2.0","-","6.0","/","1.0"]
+        let myOperator = "*"
+        
+        let result = calculator.calculatorWithOnePriorityOperator(given,with: myOperator)
+        
+        XCTAssertEqual(result, ["1.0","+","2.0","+","6.0","/","1.0","1.0","+","2.0","-","6.0","/","1.0"])
+    }
+    
+    func testGivenArrayOfStringWhenCalcultateMinorOperatorThenArrayOfStringsolve(){
+        let given = ["1.0","+","1.0","-","6.0","+","8.0"]
+        
+        let result = calculator.calculatorWithOneMinorOperator(given)
+        
+        XCTAssertEqual(result, ["4.0"])
+    }
+
+    func testGivenAstringWhenCalculateThenReturnResult(){
+        let given = ["1.0","+","1.0","*","2.0","+","8.0","/","2.0","-","1.0","+","1.0","*","2.0","-","6.0","/","1.0"]
+        
+        let result = calculator.calculateAll(given)
+        
+        XCTAssertEqual(result, ["2.0"])
+    }
+    
+    
     
     
 }

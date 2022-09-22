@@ -51,8 +51,9 @@ class CalculatorTdd {
         return inputs.firstIndex(of: inputOperator)
     }
     
-    func extractByArray (_ inputs:[String], _ index: Int) -> [String] {
+    func extractByArray (_ inputs:[String], at index: Int) -> [String] {
         var result:[String] = []
+        
         result.append(inputs[index-1])
         result.append(inputs[index])
         result.append(inputs[index+1])
@@ -75,9 +76,58 @@ class CalculatorTdd {
         default:
             break
         }
+        
         return result
+    }
+    
+    func remove(_ inputs:[String],at index: Int) -> [String] {
+        var copyOfInput = inputs
+        
+        copyOfInput.remove(at: index+1)
+        copyOfInput.remove(at: index)
+        copyOfInput.remove(at: index-1)
+        
+        return copyOfInput
         
     }
-
+    
+    func calculateOneOperation(_ inputs:[String],at index: Int) -> [String] {
+        var copyOfInput = inputs
+        var result = extractByArray(copyOfInput,at: index)
+        
+        result = reduce(result)
+        copyOfInput = remove(copyOfInput,at: index)
+        copyOfInput.insert(contentsOf: result, at: index-1)
+        
+        return copyOfInput
+    }
+    
+    func calculatorWithOnePriorityOperator(_ inputs:[String],with myOperator: String) -> [String] {
+        var copy = inputs
+        while findOperatorToExecute(copy, myOperator) != 0 {
+            guard let  wheretoInsert = findOperatorToExecute(copy, myOperator) else { return copy }
+            copy = calculateOneOperation(copy, at: wheretoInsert)
+        }
+        return copy
+    }
+    
+    func calculatorWithOneMinorOperator(_ inputs:[String]) -> [String] {
+        var copy = inputs
+        while copy.count != 1 {
+            
+            copy = calculateOneOperation(copy, at: 1)
+        }
+        return copy
+    }
+    
+    func calculateAll(_ inputs:[String]) -> [String] {
+        var copyInputs = inputs
+        
+        copyInputs = calculatorWithOnePriorityOperator(copyInputs, with: "*")
+        copyInputs = calculatorWithOnePriorityOperator(copyInputs, with: "/")
+        copyInputs = calculatorWithOneMinorOperator(copyInputs)
+        
+        return copyInputs
+    }
 }
 
