@@ -6,13 +6,9 @@
 //  Copyright © 2022 Vincent Saluzzo. All rights reserved.
 //
 
-//Liste de mes comportement (test cases) pour réaliser le modèle en TDD :
-
-
 @testable import CountOnMe
 
 import XCTest
-
 
 final class CountOnMeTests: XCTestCase {
     
@@ -51,7 +47,7 @@ final class CountOnMeTests: XCTestCase {
         
         XCTAssertEqual(result, ["6.0"])
     }
-
+    
     func testGivenArray8Divide2WhenDivideResultIsArray4() {
         let toBeAdded = ["8.0","/","2.0"]
         
@@ -133,7 +129,7 @@ final class CountOnMeTests: XCTestCase {
         
         XCTAssertEqual(result, ["1.0","+","+","6.0","/","1.0"])
     }
-
+    
     func testGivenOperatorWwhenCalculateOneOperatorThenArrayOfstringReducedWithoutOperator(){
         let given = ["1.0","+","1.0","*","2.0","+","6.0","/","1.0","1.0","+","1.0","*","2.0","-","6.0","/","1.0"]
         let myOperator = "*"
@@ -150,7 +146,7 @@ final class CountOnMeTests: XCTestCase {
         
         XCTAssertEqual(result, ["4.0"])
     }
-
+    
     func testGivenAstringWhenCalculateThenReturnResult(){
         let given = ["1.0","+","1.0","*","2.0","+","8.0","/","2.0","-","1.0","+","1.0","*","2.0","-","6.0","/","1.0"]
         

@@ -7,7 +7,7 @@
 //
 
 
- 
+
 
 import UIKit
 
@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         } else {
             alertOperatorAlreadyExist()
         }
-       
+        
     }
     
     
