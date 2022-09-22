@@ -11,68 +11,70 @@ import Foundation
 
 class CalculatorTdd {
   
-    func additionByArray(_ toBeAdded: [String]) -> [String] {
+    func additionByArray(_ newElement: [String]) -> [String] {
         let result: [String]
-        let firstNumber = Double(toBeAdded[0])!
-        let secondNumber = Double(toBeAdded[2])!
+        let firstNumber = Double(newElement[0])!
+        let secondNumber = Double(newElement[2])!
         let calcul = firstNumber+secondNumber
         result = ["\(calcul)"]
         return result
     }
     
-    func substractByArray(_ toBeAdded: [String]) -> [String] {
+    
+    func substractByArray(_ newElement: [String]) -> [String] {
         let result: [String]
-        let firstNumber = Double(toBeAdded[0])!
-        let secondNumber = Double(toBeAdded[2])!
+        let firstNumber = Double(newElement[0])!
+        let secondNumber = Double(newElement[2])!
         let calcul = firstNumber-secondNumber
         result = ["\(calcul)"]
         return result
     }
     
-    func multiplyByArray(_ toBeAdded: [String]) -> [String] {
+    func multiplyByArray(_ newElement: [String]) -> [String] {
         let result: [String]
-        let firstNumber = Double(toBeAdded[0])!
-        let secondNumber = Double(toBeAdded[2])!
+        let firstNumber = Double(newElement[0])!
+        let secondNumber = Double(newElement[2])!
         let calcul = firstNumber*secondNumber
         result = ["\(calcul)"]
         return result
     }
     
-    func divideByArray(_ toBeAdded: [String]) -> [String] {
+    func divideByArray(_ newElement: [String]) -> [String] {
         let result: [String]
-        let firstNumber = Double(toBeAdded[0])!
-        let secondNumber = Double(toBeAdded[2])!
+        let firstNumber = Double(newElement[0])!
+        let secondNumber = Double(newElement[2])!
         let calcul = firstNumber/secondNumber
         result = ["\(calcul)"]
         return result
     }
     
-    func findOperatorToExecute(_ inputs: [String], _ inputOperator: String) -> Int? {
-        return inputs.firstIndex(of: inputOperator)
+    func findPositionOfOperation(_ newElement: [String],with operation: String) -> Int? {
+        return newElement.firstIndex(of: operation)
     }
     
-    func extractByArray (_ inputs:[String], at index: Int) -> [String] {
+    func extractByArray (_ newElement:[String], at index: Int) -> [String] {
         var result:[String] = []
         
-        result.append(inputs[index-1])
-        result.append(inputs[index])
-        result.append(inputs[index+1])
+        result.append(newElement[index-1])
+        result.append(newElement[index])
+        result.append(newElement[index+1])
         
         return result
     }
     
-    func reduce(_ inputs:[String]) -> [String] {
+    func reduce(_ newElement:[String]) -> [String] {
         var result:[String] = []
+        let operation = newElement[1]
         
-        switch inputs[1] {
+        switch operation {
         case "+":
-            result = additionByArray(inputs)
+            result = additionByArray(newElement)
         case "-":
-            result = substractByArray(inputs)
+            result = substractByArray(newElement)
         case "*":
-            result = multiplyByArray(inputs)
+            result = multiplyByArray(newElement)
         case "/":
-            result = divideByArray(inputs)
+            result = divideByArray(newElement)
         default:
             break
         }
@@ -80,8 +82,8 @@ class CalculatorTdd {
         return result
     }
     
-    func remove(_ inputs:[String],at index: Int) -> [String] {
-        var copyOfInput = inputs
+    func remove(_ newElement:[String],at index: Int) -> [String] {
+        var copyOfInput = newElement
         
         copyOfInput.remove(at: index+1)
         copyOfInput.remove(at: index)
@@ -91,8 +93,8 @@ class CalculatorTdd {
         
     }
     
-    func calculateOneOperation(_ inputs:[String],at index: Int) -> [String] {
-        var copyOfInput = inputs
+    func calculateOneOperation(_ newElement:[String],at index: Int) -> [String] {
+        var copyOfInput = newElement
         var result = extractByArray(copyOfInput,at: index)
         
         result = reduce(result)
@@ -102,26 +104,26 @@ class CalculatorTdd {
         return copyOfInput
     }
     
-    func calculatorWithOnePriorityOperator(_ inputs:[String],with myOperator: String) -> [String] {
-        var copy = inputs
-        while findOperatorToExecute(copy, myOperator) != 0 {
-            guard let  wheretoInsert = findOperatorToExecute(copy, myOperator) else { return copy }
-            copy = calculateOneOperation(copy, at: wheretoInsert)
+    func calculatorWithOnePriorityOperator(_ newElement:[String],with operation: String) -> [String] {
+        var copyOfInput = newElement
+        while findPositionOfOperation(copyOfInput,with: operation) != 0 {
+            guard let  wheretoCalculate = findPositionOfOperation(copyOfInput,with: operation) else { return copyOfInput }
+            copyOfInput = calculateOneOperation(copyOfInput, at: wheretoCalculate)
         }
-        return copy
+        return copyOfInput
     }
     
-    func calculatorWithOneMinorOperator(_ inputs:[String]) -> [String] {
-        var copy = inputs
-        while copy.count != 1 {
+    func calculatorWithOneMinorOperator(_ newElement:[String]) -> [String] {
+        var copyOfInput = newElement
+        while copyOfInput.count != 1 {
             
-            copy = calculateOneOperation(copy, at: 1)
+            copyOfInput = calculateOneOperation(copyOfInput, at: 1)
         }
-        return copy
+        return copyOfInput
     }
     
-    func calculateAll(_ inputs:[String]) -> [String] {
-        var copyInputs = inputs
+    func calculateAll(_ newElement:[String]) -> [String] {
+        var copyInputs = newElement
         
         copyInputs = calculatorWithOnePriorityOperator(copyInputs, with: "*")
         copyInputs = calculatorWithOnePriorityOperator(copyInputs, with: "/")

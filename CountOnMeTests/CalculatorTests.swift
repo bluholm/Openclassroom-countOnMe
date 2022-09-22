@@ -64,7 +64,7 @@ final class CountOnMeTests: XCTestCase {
     func testGivenArrayOfStringWhenGetIndexFirstOperatorThenINdexis5() {
         let given = ["1.0","+","1.0","*","2.0" ]
         let inputOperator = "*"
-        let then = calculator.findOperatorToExecute(given,inputOperator)
+        let then = calculator.findPositionOfOperation(given,with: inputOperator)
         XCTAssertEqual(then, 3)
     }
     
