@@ -1,14 +1,14 @@
 //
-//  calculs.swift
+//  Calcul.swift
 //  CountOnMe
 //
 //  Created by Marc-Antoine BAR on 2022-09-18.
 //  Copyright © 2022 Vincent Saluzzo. All rights reserved.
-// 8/2*4-3
 
-import UIKit
 
-class Calcul {
+import Foundation
+
+class Calculator {
     
     ///function  calculate the result
     func getResultTotalOperation(_ elements: [String]) -> [String] {
@@ -20,15 +20,15 @@ class Calcul {
         return copyOfElements
     }
     
-    //execution of division & multiplier first
+    ///execution of division & multiplier first
     private  func getResultOfPriorityOperations(_ operations: [String],_ operatorSign: String) -> [String]{
         
         var operationsTemp = operations
         while operationsTemp.contains(operatorSign){
             var  temporaryResult: Double
-            guard let indexOfMultiplier = operationsTemp.firstIndex(of: operatorSign) else { return operationsTemp }
-            guard let left = Double(operationsTemp[indexOfMultiplier-1]) else { return operationsTemp }
-            guard let right = Double(operationsTemp[indexOfMultiplier+1]) else { return operationsTemp }
+            let indexOfMultiplier = operationsTemp.firstIndex(of: operatorSign)!
+            let left = Double(operationsTemp[indexOfMultiplier-1])!
+            let right = Double(operationsTemp[indexOfMultiplier+1])!
             
             if operatorSign == "*" {
                 temporaryResult = left * right
@@ -41,7 +41,7 @@ class Calcul {
         return operationsTemp
     }
     
-    //reduce minus to let elements with only the good information ( plus and minus )
+    ///reduce minus to let elements with only the good information ( plus and minus )
     private func getResultsOfMinorOperations(operations: [String]) -> [String]{
         
         var operationsTemp = operations
@@ -74,6 +74,5 @@ class Calcul {
         operationsResult.remove(at: index-1)
         return operationsResult
     }
-    
-    
 }
+

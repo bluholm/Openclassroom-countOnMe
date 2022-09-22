@@ -13,7 +13,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private var calculate = Calcul()
+    private var calculator = Calculator()
+    
+    
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
     
@@ -96,7 +98,7 @@ class ViewController: UIViewController {
             return self.present(alertVC, animated: true, completion: nil)
         }
         
-        guard let result = calculate.getResultTotalOperation(elements).first else { return }
+        guard let result = calculator.getResultTotalOperation(elements).first else { return }
         textView.text.append(" = \(result)")
     }
     
