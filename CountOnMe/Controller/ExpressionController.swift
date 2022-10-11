@@ -11,38 +11,38 @@ import UIKit
 extension ViewController {
     
     var elements: [String] {
-        return textView.text.split(separator: " ").map { "\($0)" }
+        textView.text.split(separator: " ").map { "\($0)" }
     }
     
     
     var expressionIsCorrect: Bool {
-        return elements.last != "+" && elements.last != "-"
+        elements.last != "+" && elements.last != "-"
         && elements.last != "*" && elements.last != "/"
         && !expressionContainEqual
     }
     
     var isFirstoperator: Bool {
-        return elements.count>=1
+        elements.count>=1
     }
     
     var expressionContainEqual: Bool {
-        return elements.contains("=")
+        elements.contains("=")
     }
     
     var expressionHaveEnoughElement: Bool {
-        return elements.count >= 3
+        elements.count >= 3
     }
     
     var canAddOperator: Bool {
-        return elements.last != "+" && elements.last != "-" && elements.last != "*"
+        elements.last != "+" && elements.last != "-" && elements.last != "*"
         && elements.last != "/" && !expressionContainEqual
     }
     
     var expressionHaveResult: Bool {
-        return textView.text.firstIndex(of: "=") != nil
+        textView.text.firstIndex(of: "=") != nil
     }
     
     var divisionByzero: Bool {
-        return elements.last != "/"
+        elements.last != "/"
     }
 }

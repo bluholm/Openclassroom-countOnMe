@@ -5,7 +5,7 @@
 //  Created by Marc-Antoine BAR on 2022-09-22.
 //  Copyright © 2022 Vincent Saluzzo. All rights reserved.
 //
-
+// This model is working well and done after to try TTD and having a good code
 import Foundation
 
 class CalculatorTdd {

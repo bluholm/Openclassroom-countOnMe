@@ -25,7 +25,7 @@ final class CountOnMeTests: XCTestCase {
     
     
     func testGivenArray2Plus2WhenAdditionResultIsArray4() {
-        let toBeAdded = ["2.0","+","2.0"]
+        let toBeAdded = ["2.0", "+", "2.0"]
         
         let result = calculator.additionByArray(toBeAdded)
         
@@ -33,7 +33,7 @@ final class CountOnMeTests: XCTestCase {
     }
     
     func testGivenArray2Minus2WhenSubstractResultIsArray0() {
-        let toBeAdded = ["2.0","-","2.0"]
+        let toBeAdded = ["2.0", "-", "2.0"]
         
         let result = calculator.substractByArray(toBeAdded)
         

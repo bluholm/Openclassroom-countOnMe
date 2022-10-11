@@ -4,6 +4,7 @@
 //
 //  Created by Marc-Antoine BAR on 2022-09-18.
 //  Copyright © 2022 Vincent Saluzzo. All rights reserved.
+// This model is working but i find it too complex and not really in "swift mood"
 
 
 import Foundation
@@ -21,7 +22,7 @@ class Calculator {
     }
     
     ///execution of division & multiplier first
-    private  func getResultOfPriorityOperations(_ operations: [String],_ operatorSign: String) -> [String]{
+    private  func getResultOfPriorityOperations(_ operations: [String],_ operatorSign: String) -> [String] {
         
         var operationsTemp = operations
         while operationsTemp.contains(operatorSign){
